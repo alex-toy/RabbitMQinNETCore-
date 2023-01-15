@@ -8,3 +8,9 @@ Once a message is received by a message broker from a producer, it routes the me
 
 
 https://www.youtube.com/watch?v=w84uFSwulBI&list=PLXCqSX1D2fd_6bna8uP4-p3Y8wZxyB75G&index=3
+```
+
+
+## Authentication API
+
+<img src="/pictures/authentication.png" title="authentication"  width="800">
