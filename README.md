@@ -10,6 +10,7 @@ This project is based on this youtube course :
 
 https://www.youtube.com/watch?v=w84uFSwulBI&list=PLXCqSX1D2fd_6bna8uP4-p3Y8wZxyB75G&index=3
 
+## Producer project
 
 1. Install **RabbitMQ Docker** image
 ```
@@ -26,3 +27,14 @@ docker run -d --hostname my-rabbit  --name ecomm-rabbit -p 15672:15672 -p 5672:5
 ```
 RabbitMQ.Client
 ```
+
+
+## Consumer project
+
+1. install packages
+```
+RabbitMQ.Client
+```
+
+2. Launch both *Consumer* and *Producer* and see the result
+<img src="/pictures/message.png" title="message"  width="800">

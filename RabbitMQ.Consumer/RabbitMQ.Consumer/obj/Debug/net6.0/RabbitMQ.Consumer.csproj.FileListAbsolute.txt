@@ -1,0 +1,17 @@
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\bin\Debug\net6.0\RabbitMQ.Consumer.exe
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\bin\Debug\net6.0\RabbitMQ.Consumer.deps.json
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\bin\Debug\net6.0\RabbitMQ.Consumer.runtimeconfig.json
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\bin\Debug\net6.0\RabbitMQ.Consumer.dll
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\bin\Debug\net6.0\RabbitMQ.Consumer.pdb
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\bin\Debug\net6.0\RabbitMQ.Client.dll
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\obj\Debug\net6.0\RabbitMQ.Consumer.csproj.AssemblyReference.cache
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\obj\Debug\net6.0\RabbitMQ.Consumer.GeneratedMSBuildEditorConfig.editorconfig
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\obj\Debug\net6.0\RabbitMQ.Consumer.AssemblyInfoInputs.cache
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\obj\Debug\net6.0\RabbitMQ.Consumer.AssemblyInfo.cs
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\obj\Debug\net6.0\RabbitMQ.Consumer.csproj.CoreCompileInputs.cache
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\obj\Debug\net6.0\RabbitMQ.Consumer.csproj.CopyComplete
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\obj\Debug\net6.0\RabbitMQ.Consumer.dll
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\obj\Debug\net6.0\refint\RabbitMQ.Consumer.dll
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\obj\Debug\net6.0\RabbitMQ.Consumer.pdb
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\obj\Debug\net6.0\RabbitMQ.Consumer.genruntimeconfig.cache
+C:\source\CsharpLibraries\RabbitMQinNETCore-\RabbitMQ.Consumer\RabbitMQ.Consumer\obj\Debug\net6.0\ref\RabbitMQ.Consumer.dll
