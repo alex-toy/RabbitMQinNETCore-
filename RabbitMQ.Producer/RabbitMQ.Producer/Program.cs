@@ -16,11 +16,7 @@ static class Program
         using IConnection? connection = factory.CreateConnection();
         using IModel? channel = connection.CreateModel();
 
-        string queueName = "demo-queue";
-        channel.QueueDeclare(queueName, durable:true, exclusive:false, autoDelete:false, arguments:null);
-        var message = new { Name = "Producer", Message = "Hello!" };
-        var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
-        channel.BasicPublish("", queueName, null, body);
+        QueueProducer.Publish(channel);
 
         //FanoutExchangePublisher.Publish(channel);
     }

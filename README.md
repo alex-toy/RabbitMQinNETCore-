@@ -38,3 +38,17 @@ RabbitMQ.Client
 
 2. Launch both *Consumer* and *Producer* and see the result
 <img src="/pictures/message.png" title="message"  width="800">
+```
+
+3. Launch both *Consumer* and multiple instances of *Producer* and see the result
+<img src="/pictures/multi_producer_consumer.png" title="mutliple instances"  width="800">
+```
+
+3. Launch both *Producer* and multiple instances of *Consumer* and see the result
+<img src="/pictures/multiple_consumer.png" title="multiple consumer"  width="800">
+
+
+
+
+
+https://github.com/choudhurynirjhar/rabbitmq-demo

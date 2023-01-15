@@ -14,18 +14,9 @@ namespace RabbitMQ.Consumer
             };
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
-            string queueName = "demo-queue";
-            channel.QueueDeclare(queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
-            var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (sender, e) =>
-            {
-                var body = e.Body.ToArray();
-                var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine(message);
-            };
+            QueueConsumer.Consume(channel);
 
-            channel.BasicConsume(queueName, true, consumer);
             Console.ReadLine();
         }
     }
