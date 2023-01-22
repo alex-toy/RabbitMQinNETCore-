@@ -9,7 +9,9 @@ static class Program
         IModel channel = CreateChannel();
 
         //QueueProducer.Publish(channel);
-        DirectExchangePublisher.Publish(channel);
+        //DirectExchangePublisher.Publish(channel);
+        TopicExchangePublisher.Publish(channel);
+        //HeaderExchangePublisher.Publish(channel);
     }
 
     private static IModel CreateChannel()

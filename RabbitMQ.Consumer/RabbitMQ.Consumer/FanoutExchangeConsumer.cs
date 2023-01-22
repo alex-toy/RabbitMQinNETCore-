@@ -6,17 +6,14 @@ namespace RabbitMQ.Consumer
 {
     public static class FanoutExchangeConsumer
     {
+        private const string Exchange = "demo-fanout-exchange";
+        private const string Queue = "demo-fanout-queue";
+
         public static void Consume(IModel channel)
         {
-            channel.ExchangeDeclare("demo-fanout-exchange", ExchangeType.Fanout);
-            channel.QueueDeclare("demo-fanout-queue",
-                durable: true,
-                exclusive: false,
-                autoDelete: false,
-                arguments: null);
-
-
-            channel.QueueBind("demo-fanout-queue", "demo-fanout-exchange", string.Empty);
+            channel.ExchangeDeclare(Exchange, ExchangeType.Fanout);
+            channel.QueueDeclare(Queue, durable: true, exclusive: false, autoDelete: false, arguments: null);
+            channel.QueueBind(Queue, Exchange, string.Empty);
             channel.BasicQos(0, 10, false);
 
             var consumer = new EventingBasicConsumer(channel);
@@ -26,7 +23,7 @@ namespace RabbitMQ.Consumer
                 Console.WriteLine(message);
             };
 
-            channel.BasicConsume("demo-fanout-queue", true, consumer);
+            channel.BasicConsume(Queue, true, consumer);
             Console.WriteLine("Consumer started");
             Console.ReadLine();
         }

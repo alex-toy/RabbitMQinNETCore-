@@ -4,19 +4,17 @@ using System.Text;
 
 namespace RabbitMQ.Consumer
 {
-    public static class HeaderExchangeConsumer
+    public static class TopicExchangeConsumer
     {
-        private const string Exchange = "demo-header-exchange";
-        private const string Queue = "demo-header-queue";
+        private const string Exchange = "demo-topic-exchange";
+        private const string Queue = "demo-topic-queue";
+        private const string RoutingKey = "account.*";
 
         public static void Consume(IModel channel)
         {
-            channel.ExchangeDeclare(Exchange, ExchangeType.Headers);
+            channel.ExchangeDeclare(Exchange, ExchangeType.Topic);
             channel.QueueDeclare(Queue, durable: true, exclusive: false, autoDelete: false, arguments: null);
-
-            var header = new Dictionary<string, object> { { "account", "new" } };
-
-            channel.QueueBind(Queue, Exchange, string.Empty, header);
+            channel.QueueBind(Queue, Exchange, RoutingKey);
             channel.BasicQos(0, 10, false);
 
             var consumer = new EventingBasicConsumer(channel);

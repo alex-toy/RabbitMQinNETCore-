@@ -1,6 +1,4 @@
 ﻿using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using System.Text;
 
 namespace RabbitMQ.Consumer
 {
@@ -11,7 +9,9 @@ namespace RabbitMQ.Consumer
             IModel channel = CreateChannel();
 
             //QueueConsumer.Consume(channel);
-            DirectExchangeConsumer.Consume(channel);
+            //DirectExchangeConsumer.Consume(channel);
+            TopicExchangeConsumer.Consume(channel);
+            //HeaderExchangeConsumer.Consume(channel);
 
             Console.ReadLine();
         }

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace RabbitMQ.Producer
 {
-    static class FanoutExchangePublisher
+    static class TopicExchangePublisher
     {
-        private const string Exchange = "demo-fanout-exchange";
+        private const string Exchange = "demo-topic-exchange";
 
         public static void Publish(IModel channel)
         {
@@ -14,7 +14,7 @@ namespace RabbitMQ.Producer
             {
                 {"x-message-ttl", 30000 }
             };
-            channel.ExchangeDeclare(Exchange, ExchangeType.Fanout, arguments: ttl);
+            channel.ExchangeDeclare(Exchange, ExchangeType.Topic, arguments: ttl);
             var count = 0;
 
             while (true)
@@ -22,10 +22,7 @@ namespace RabbitMQ.Producer
                 var message = new { Name = "Producer", Message = $"Hello! Count: {count}" };
                 var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
-                var properties = channel.CreateBasicProperties();
-                properties.Headers = new Dictionary<string, object> { { "account", "update" } };
-
-                channel.BasicPublish(Exchange, "account.new", properties, body);
+                channel.BasicPublish(Exchange, "account.init", null, body);
                 count++;
                 Thread.Sleep(1000);
             }
