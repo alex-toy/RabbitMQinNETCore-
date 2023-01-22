@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using RabbitMQ.Client;
-using System.Text;
+﻿using RabbitMQ.Client;
 
 namespace RabbitMQ.Producer;
 
@@ -8,16 +6,20 @@ static class Program
 {
     static void Main()
     {
+        IModel channel = CreateChannel();
+
+        //QueueProducer.Publish(channel);
+        DirectExchangePublisher.Publish(channel);
+    }
+
+    private static IModel CreateChannel()
+    {
         ConnectionFactory? factory = new ConnectionFactory
         {
             Uri = new Uri("amqp://guest:guest@localhost:5672")
         };
-
-        using IConnection? connection = factory.CreateConnection();
-        using IModel? channel = connection.CreateModel();
-
-        QueueProducer.Publish(channel);
-
-        //FanoutExchangePublisher.Publish(channel);
+        IConnection connection = factory.CreateConnection();
+        IModel channel = connection.CreateModel();
+        return channel;
     }
 }

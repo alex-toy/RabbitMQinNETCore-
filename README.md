@@ -48,6 +48,19 @@ RabbitMQ.Client
 <img src="/pictures/multiple_consumer.png" title="multiple consumer"  width="800">
 
 
+## Direct Exchange
+
+1. Direct Exchange Consumer
+<img src="/pictures/direct_exchange_consumer.png" title="direct exchange consumer"  width="800">
+<img src="/pictures/direct_exchange_consumer2.png" title="direct exchange consumer"  width="400">
+
+2. Direct Exchange Producer
+<img src="/pictures/direct_exchange_producer.png" title="direct exchange producer"  width="400">
+
+3. Prefetch count
+<img src="/pictures/prefetch_count.png" title="prefetch count"  width="800">
+
+
 
 
 

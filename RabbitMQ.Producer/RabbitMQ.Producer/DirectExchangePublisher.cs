@@ -4,17 +4,19 @@ using System.Text;
 
 namespace RabbitMQ.Producer
 {
-    public class QueueProducer
+    public static class DirectExchangePublisher
     {
-        private const string Queue = "demo-queue";
+        private const string RoutingKey = "account.init";
+        private const string Exchange = "direct_exchange";
 
         public static void Publish(IModel channel)
         {
-            channel.QueueDeclare(Queue,
-                durable: true,
-                exclusive: false,
-                autoDelete: false,
-                arguments: null);
+            Dictionary<string, object>? ttl = new Dictionary<string, object>
+            {
+                {"x-message-ttl", 30000 }
+            };
+
+            channel.ExchangeDeclare(Exchange, ExchangeType.Direct, arguments: ttl);
             var count = 0;
 
             while (true)
@@ -22,7 +24,7 @@ namespace RabbitMQ.Producer
                 var message = new { Name = "Producer", Message = $"Hello! Count: {count}" };
                 var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
-                channel.BasicPublish("", Queue, null, body);
+                channel.BasicPublish(Exchange, RoutingKey, null, body);
                 count++;
                 Thread.Sleep(1000);
             }

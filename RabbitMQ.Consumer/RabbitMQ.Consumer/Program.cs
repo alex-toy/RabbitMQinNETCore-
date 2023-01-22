@@ -8,16 +8,23 @@ namespace RabbitMQ.Consumer
     {
         static void Main(string[] args)
         {
+            IModel channel = CreateChannel();
+
+            //QueueConsumer.Consume(channel);
+            DirectExchangeConsumer.Consume(channel);
+
+            Console.ReadLine();
+        }
+
+        private static IModel CreateChannel()
+        {
             var factory = new ConnectionFactory
             {
                 Uri = new Uri("amqp://guest:guest@localhost:5672")
             };
-            using var connection = factory.CreateConnection();
-            using var channel = connection.CreateModel();
-
-            QueueConsumer.Consume(channel);
-
-            Console.ReadLine();
+            IConnection connection = factory.CreateConnection();
+            IModel channel = connection.CreateModel();
+            return channel;
         }
     }
 }   
