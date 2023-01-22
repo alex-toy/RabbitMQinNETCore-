@@ -61,14 +61,17 @@ RabbitMQ.Client
 <img src="/pictures/prefetch_count.png" title="prefetch count"  width="800">
 
 
-## Topic Exchange
+## Topic Exchange 
 
 1. Topic Exchange Consumer
 <img src="/pictures/topic_exchange_consumer.png" title="topic exchange consumer"  width="800">
-<img src="/pictures/topic_exchange_consumer2.png" title="topic exchange consumer"  width="800">
+<img src="/pictures/topic_exchange_consumer2.png" title="topic exchange consumer"  width="400">
 
 2. Topic Exchange Producer
 <img src="/pictures/topic_exchange_producer.png" title="topic exchange producer"  width="800">
+
+
+## Header Exchange 
 
 
 
