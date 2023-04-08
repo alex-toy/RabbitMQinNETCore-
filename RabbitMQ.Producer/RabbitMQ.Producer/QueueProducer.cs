@@ -6,23 +6,27 @@ namespace RabbitMQ.Producer
 {
     public class QueueProducer
     {
-        private const string Queue = "demo-queue";
+        public string Queue;
+        public IModel Channel;
 
-        public static void Publish(IModel channel)
+        public QueueProducer(string queue, IModel channel)
         {
-            channel.QueueDeclare(Queue,
-                durable: true,
-                exclusive: false,
-                autoDelete: false,
-                arguments: null);
-            var count = 0;
+            Queue = queue;
+            Channel = channel;
+            Channel.QueueDeclare(Queue, durable: true, exclusive: false, autoDelete: false, arguments: null);
+        }
 
+        public void Publish()
+        {
+            Console.WriteLine("Producer started");
+            var count = 0;
             while (true)
             {
-                var message = new { Name = "Producer", Message = $"Hello! Count: {count}" };
+                var message = new Message("Producer", $"Hello! Count: {count}");
+                Console.WriteLine(message);
                 var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
-                channel.BasicPublish("", Queue, null, body);
+                Channel.BasicPublish("", Queue, null, body);
                 count++;
                 Thread.Sleep(1000);
             }

@@ -4,11 +4,19 @@ using System.Text;
 
 namespace RabbitMQ.Consumer
 {
-    public static class QueueConsumer
+    public class QueueConsumer
     {
-        private const string Queue = "demo-queue";
+        public string Queue;
+        public delegate void EventProcessor(string message);
+        public EventProcessor? eventProcessor;
 
-        public static void Consume(IModel channel)
+        public QueueConsumer(string queue, EventProcessor ep)
+        {
+            Queue = queue;
+            eventProcessor = ep;
+        }
+
+        public void Consume(IModel channel)
         {
             channel.QueueDeclare(Queue,
                 durable: true,
@@ -17,10 +25,11 @@ namespace RabbitMQ.Consumer
                 arguments: null);
 
             EventingBasicConsumer? consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (sender, e) => {
+            consumer.Received += (sender, e) =>
+            {
                 var body = e.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine(message);
+                eventProcessor(message);
             };
 
             channel.BasicConsume(Queue, true, consumer);
