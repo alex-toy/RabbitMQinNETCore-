@@ -6,10 +6,6 @@ You can think of a message broker like a post office. Its main responsibility is
 
 Once a message is received by a message broker from a producer, it routes the message to a subscriber. The message broker pattern is one of the most useful patterns when it comes to decoupling microservices.
 
-This project is based on this youtube course :
-
-https://www.youtube.com/watch?v=w84uFSwulBI&list=PLXCqSX1D2fd_6bna8uP4-p3Y8wZxyB75G&index=3
-
 ## Producer project
 
 1. Install **RabbitMQ Docker** image
@@ -21,7 +17,7 @@ docker run -d --hostname my-rabbit  --name ecomm-rabbit -p 15672:15672 -p 5672:5
 
 <img src="/pictures/rabbitmq.png" title="rabbitmq on creation"  width="400">
 <img src="/pictures/rabbitmq2.png" title="rabbitmq on creation"  width="800">
-```
+
 
 3. install packages
 ```
@@ -73,8 +69,14 @@ RabbitMQ.Client
 
 ## Header Exchange 
 
+<img src="/pictures/header_exchange_consumer.png" title="header exchange consumer"  width="400">
+<img src="/pictures/header_exchange_consumer2.png" title="header exchange consumer"  width="800">
+
+
+## Fanout Exchange 
+
+<img src="/pictures/fanout_exchange_consumer.png" title="fanout exchange consumer"  width="400">
+<img src="/pictures/fanout_exchange_consumer2.png" title="fanout exchange consumer"  width="800">
 
 
 
-
-https://github.com/choudhurynirjhar/rabbitmq-demo

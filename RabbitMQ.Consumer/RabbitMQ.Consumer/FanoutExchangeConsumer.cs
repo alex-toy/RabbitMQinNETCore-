@@ -4,26 +4,33 @@ using System.Text;
 
 namespace RabbitMQ.Consumer
 {
-    public static class FanoutExchangeConsumer
+    public class FanoutExchangeConsumer
     {
-        private const string Exchange = "demo-fanout-exchange";
-        private const string Queue = "demo-fanout-queue";
+        public string Exchange;
+        public string Queue;
+        public IModel Channel;
 
-        public static void Consume(IModel channel)
+        public FanoutExchangeConsumer(string queue, string exchange, IModel channel)
         {
-            channel.ExchangeDeclare(Exchange, ExchangeType.Fanout);
-            channel.QueueDeclare(Queue, durable: true, exclusive: false, autoDelete: false, arguments: null);
-            channel.QueueBind(Queue, Exchange, string.Empty);
-            channel.BasicQos(0, 10, false);
+            Exchange = exchange;
+            Queue = queue;
+            Channel = channel;
+            Channel.ExchangeDeclare(Exchange, ExchangeType.Fanout);
+            Channel.QueueDeclare(Queue, durable: true, exclusive: false, autoDelete: false, arguments: null);
+            Channel.QueueBind(Queue, Exchange, string.Empty);
+            Channel.BasicQos(0, 10, false);
+        }
 
-            var consumer = new EventingBasicConsumer(channel);
+        public void Consume()
+        {
+            var consumer = new EventingBasicConsumer(Channel);
             consumer.Received += (sender, e) => {
                 var body = e.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine(message);
             };
 
-            channel.BasicConsume(Queue, true, consumer);
+            Channel.BasicConsume(Queue, true, consumer);
             Console.WriteLine("Consumer started");
             Console.ReadLine();
         }

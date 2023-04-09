@@ -4,28 +4,30 @@ using System.Text;
 
 namespace RabbitMQ.Producer
 {
-    static class FanoutExchangePublisher
+    class FanoutExchangePublisher
     {
-        private const string Exchange = "demo-fanout-exchange";
+        public string Exchange;
+        public IModel Channel;
 
-        public static void Publish(IModel channel)
+        public FanoutExchangePublisher(string exchange, IModel channel)
         {
-            var ttl = new Dictionary<string, object>
-            {
-                {"x-message-ttl", 30000 }
-            };
-            channel.ExchangeDeclare(Exchange, ExchangeType.Fanout, arguments: ttl);
+            Exchange = exchange;
+            Channel = channel;
+            var ttl = new Dictionary<string, object> { { "x-message-ttl", 30000 } };
+            Channel.ExchangeDeclare(Exchange, ExchangeType.Fanout, arguments: ttl);
+        }
+
+        public void Publish()
+        {
             var count = 0;
 
             while (true)
             {
                 var message = new { Name = "Producer", Message = $"Hello! Count: {count}" };
+                Console.WriteLine(message);
                 var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
-                var properties = channel.CreateBasicProperties();
-                properties.Headers = new Dictionary<string, object> { { "account", "update" } };
-
-                channel.BasicPublish(Exchange, "account.new", properties, body);
+                Channel.BasicPublish(Exchange, string.Empty, null, body);
                 count++;
                 Thread.Sleep(1000);
             }

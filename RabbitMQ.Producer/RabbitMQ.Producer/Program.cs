@@ -22,10 +22,14 @@ static class Program
         //var topicExchangePublisher = new TopicExchangePublisher(routingKey, exchange, channel);
         //topicExchangePublisher.Publish();
 
-        string exchange = "demo-header-exchange";
-        var header = new Dictionary<string, object> { { "account", "new" } };
-        var headerExchangePublisher = new HeaderExchangePublisher(exchange, channel, header);
-        headerExchangePublisher.Publish();
+        //string exchange = "demo-header-exchange";
+        //var header = new Dictionary<string, object> { { "account", "new" } };
+        //var headerExchangePublisher = new HeaderExchangePublisher(exchange, channel, header);
+        //headerExchangePublisher.Publish();
+
+        string exchange = "demo-fanout-exchange";
+        var fanoutExchangePublisher = new FanoutExchangePublisher(exchange, channel);
+        fanoutExchangePublisher.Publish();
     }
 
     private static IModel CreateChannel(string url)

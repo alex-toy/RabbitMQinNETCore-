@@ -23,11 +23,16 @@ namespace RabbitMQ.Consumer
             //var topicExchangeConsumer = new TopicExchangeConsumer(Queue, RoutingKey, Exchange, channel);
             //topicExchangeConsumer.Consume();
 
-            string queue = "demo-header-queue";
-            string exchange = "demo-header-exchange";
-            var header = new Dictionary<string, object> { { "account", "new" } };
-            var headerExchangeConsumer = new HeaderExchangeConsumer(queue, exchange, channel, header);
-            headerExchangeConsumer.Consume();
+            //string queue = "demo-header-queue";
+            //string exchange = "demo-header-exchange";
+            //var header = new Dictionary<string, object> { { "account", "new" } };
+            //var headerExchangeConsumer = new HeaderExchangeConsumer(queue, exchange, channel, header);
+            //headerExchangeConsumer.Consume();
+
+            string queue = "demo-fanout-queue";
+            string exchange = "demo-fanout-exchange";
+            var fanoutExchangeConsumer = new FanoutExchangeConsumer(queue, exchange, channel);
+            fanoutExchangeConsumer.Consume();
 
             Console.ReadLine();
         }
