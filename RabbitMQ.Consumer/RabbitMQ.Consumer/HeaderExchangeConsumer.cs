@@ -4,29 +4,36 @@ using System.Text;
 
 namespace RabbitMQ.Consumer
 {
-    public static class HeaderExchangeConsumer
+    public class HeaderExchangeConsumer
     {
-        private const string Exchange = "demo-header-exchange";
-        private const string Queue = "demo-header-queue";
+        public string Queue;
+        public string Exchange;
+        public IModel Channel;
+        public Dictionary<string, object> Header;
 
-        public static void Consume(IModel channel)
+        public HeaderExchangeConsumer(string queue, string exchange, IModel channel, Dictionary<string, object> header)
         {
-            channel.ExchangeDeclare(Exchange, ExchangeType.Headers);
-            channel.QueueDeclare(Queue, durable: true, exclusive: false, autoDelete: false, arguments: null);
+            Exchange = exchange;
+            Queue = queue;
+            Channel = channel;
+            Header = header;
+            Channel.ExchangeDeclare(Exchange, ExchangeType.Headers);
+            Channel.QueueDeclare(Queue, durable: true, exclusive: false, autoDelete: false, arguments: null);
+            
+            Channel.QueueBind(Queue, Exchange, string.Empty, header);
+            Channel.BasicQos(0, 10, false);
+        }
 
-            var header = new Dictionary<string, object> { { "account", "new" } };
-
-            channel.QueueBind(Queue, Exchange, string.Empty, header);
-            channel.BasicQos(0, 10, false);
-
-            var consumer = new EventingBasicConsumer(channel);
+        public void Consume()
+        {
+            var consumer = new EventingBasicConsumer(Channel);
             consumer.Received += (sender, e) => {
                 var body = e.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine(message);
             };
 
-            channel.BasicConsume(Queue, true, consumer);
+            Channel.BasicConsume(Queue, true, consumer);
             Console.WriteLine("Consumer started");
             Console.ReadLine();
         }

@@ -8,8 +8,8 @@ namespace RabbitMQ.Consumer
         {
             IModel channel = CreateChannel("amqp://guest:guest@localhost:5672");
 
-            QueueConsumer queueConsumer = new QueueConsumer("demo-queue", ProcessEvent);
-            queueConsumer.Consume(channel);
+            //QueueConsumer queueConsumer = new QueueConsumer("demo-queue", ProcessEvent);
+            //queueConsumer.Consume(channel);
 
             //string queue = "direct_exchange_queue";
             //string exchange = "direct_exchange";
@@ -17,8 +17,17 @@ namespace RabbitMQ.Consumer
             //var directExchangeConsumer = new DirectExchangeConsumer(queue, exchange, routingKey, channel);
             //directExchangeConsumer.Consume();
 
-            //TopicExchangeConsumer.Consume(channel);
-            //HeaderExchangeConsumer.Consume(channel);
+            //string Queue = "demo-topic-queue";
+            //string RoutingKey = "account.*";
+            //string Exchange = "demo-topic-exchange";
+            //var topicExchangeConsumer = new TopicExchangeConsumer(Queue, RoutingKey, Exchange, channel);
+            //topicExchangeConsumer.Consume();
+
+            string queue = "demo-header-queue";
+            string exchange = "demo-header-exchange";
+            var header = new Dictionary<string, object> { { "account", "new" } };
+            var headerExchangeConsumer = new HeaderExchangeConsumer(queue, exchange, channel, header);
+            headerExchangeConsumer.Consume();
 
             Console.ReadLine();
         }

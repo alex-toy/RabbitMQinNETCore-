@@ -4,28 +4,36 @@ using System.Text;
 
 namespace RabbitMQ.Producer
 {
-    static class HeaderExchangePublisher
+    class HeaderExchangePublisher
     {
-        private const string Exchange = "demo-header-exchange";
+        public string Exchange;
+        public IModel Channel;
+        public Dictionary<string, object> Header;
 
-        public static void Publish(IModel channel)
+        public HeaderExchangePublisher(string exchange, IModel channel, Dictionary<string, object> header)
         {
-            Dictionary<string, object>? ttl = new Dictionary<string, object>
-            {
-                {"x-message-ttl", 30000 }
-            };
-            channel.ExchangeDeclare(Exchange, ExchangeType.Headers, arguments: ttl);
-            var count = 0;
+            Exchange = exchange;
+            Channel = channel;
+            Header = header;
+            var ttl = new Dictionary<string, object> { { "x-message-ttl", 30000 } };
+            Channel.ExchangeDeclare(Exchange, ExchangeType.Headers, arguments: ttl);
+        }
 
+        public void Publish()
+        {
+            Console.WriteLine("Producer started");
+
+            var count = 0;
             while (true)
             {
                 var message = new { Name = "Producer", Message = $"Hello! Count: {count}" };
+                Console.WriteLine(message);
                 var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
-                var properties = channel.CreateBasicProperties();
-                properties.Headers = new Dictionary<string, object> { { "account", "update" } };
+                var properties = Channel.CreateBasicProperties();
+                properties.Headers = Header;
 
-                channel.BasicPublish(Exchange, string.Empty, properties, body);
+                Channel.BasicPublish(Exchange, string.Empty, properties, body);
                 count++;
                 Thread.Sleep(1000);
             }

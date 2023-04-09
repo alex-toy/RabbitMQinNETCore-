@@ -15,7 +15,7 @@ namespace RabbitMQ.Producer
             RoutingKey = routingKey;
             Exchange = exchange;
             Channel = channel;
-            Dictionary<string, object>? ttl = new Dictionary<string, object>
+            var ttl = new Dictionary<string, object>
             {
                 {"x-message-ttl", 30000 }
             };
